@@ -1,0 +1,47 @@
+<div class="container">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>{{ isEdit ? 'Editar Producto' : 'Nuevo Producto' }}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <form [formGroup]="productoForm" (ngSubmit)="onSubmit()">
+                <mat-form-field appearance="fill" class="full-width">
+                    <mat-label>Nombre</mat-label>
+                    <input matInput formControlName="nombre" required>
+                    <mat-error *ngIf="productoForm.get('nombre')?.hasError('required')">
+                        Nombre es requerido
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill" class="full-width">
+                    <mat-label>Precio</mat-label>
+                    <input matInput type="number" formControlName="precio" required>
+                    <mat-error *ngIf="productoForm.get('precio')?.hasError('required')">
+                        Precio es requerido
+                    </mat-error>
+                    <mat-error *ngIf="productoForm.get('precio')?.hasError('min')">
+                        Precio debe ser mayor a 0
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill" class="full-width">
+                    <mat-label>Stock</mat-label>
+                    <input matInput type="number" formControlName="stock" required>
+                    <mat-error *ngIf="productoForm.get('stock')?.hasError('required')">
+                        Stock es requerido
+                    </mat-error>
+                    <mat-error *ngIf="productoForm.get('stock')?.hasError('min')">
+                        Stock no puede ser negativo
+                    </mat-error>
+                </mat-form-field>
+
+                <div class="button-row">
+                    <button mat-raised-button color="primary" type="submit">
+                        {{ isEdit ? 'Actualizar' : 'Guardar' }}
+                    </button>
+                    <button mat-raised-button type="button" [routerLink]="['/productos']">Cancelar</button>
+                </div>
+            </form>
+        </mat-card-content>
+    </mat-card>
+</div>

@@ -1,0 +1,31 @@
+<div class="container">
+    <h2>Lista de Órdenes de Compra</h2>
+    <button mat-raised-button color="primary" [routerLink]="['/ordenes/new']">Nueva Orden</button>
+
+    <table mat-table [dataSource]="ordenes" class="mat-elevation-z8">
+        <ng-container matColumnDef="numeroOrden">
+            <th mat-header-cell *matHeaderCellDef>Número de Orden</th>
+            <td mat-cell *matCellDef="let orden">{{orden.numeroOrden}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="total">
+            <th mat-header-cell *matHeaderCellDef>Total</th>
+            <td mat-cell *matCellDef="let orden">{{orden.total | currency}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef>Acciones</th>
+            <td mat-cell *matCellDef="let orden">
+                <button mat-icon-button color="primary" [routerLink]="['/ordenes', orden.id]">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                </button>
+                <button mat-icon-button color="warn" (click)="deleteOrden(orden.id)">
+                    <i class="fa-solid fa-trash"></i>
+                </button>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+</div>

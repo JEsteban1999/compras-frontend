@@ -1,0 +1,79 @@
+<div class="container">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>{{ isEdit ? 'Editar Orden' : 'Nueva Orden' }}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <form [formGroup]="ordenForm" (ngSubmit)="onSubmit()">
+                <div formArrayName="detalles">
+                    <div *ngFor="let detalle of detalles.controls; let i = index" [formGroupName]="i"
+                        class="detalle-row">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Producto</mat-label>
+                            <mat-select formControlName="productoId" (selectionChange)="onProductoChange(i)">
+                                <mat-option *ngFor="let producto of productos" [value]="producto.id">
+                                    {{producto.nombre}} ({{producto.precio | currency}})
+                                </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="detalle.get('productoId')?.hasError('required')">
+                                Producto es requerido
+                            </mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="fill">
+                            <mat-label>Cantidad</mat-label>
+                            <input matInput type="number" formControlName="cantidad">
+                            <mat-error *ngIf="detalle.get('cantidad')?.hasError('required')">
+                                Cantidad es requerida
+                            </mat-error>
+                            <mat-error *ngIf="detalle.get('cantidad')?.hasError('min')">
+                                Cantidad debe ser al menos 1
+                            </mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="fill">
+                            <mat-label>Precio Unitario</mat-label>
+                            <input matInput type="number" formControlName="precioUnitario">
+                            <mat-error *ngIf="detalle.get('precioUnitario')?.hasError('required')">
+                                Precio es requerido
+                            </mat-error>
+                            <mat-error *ngIf="detalle.get('precioUnitario')?.hasError('min')">
+                                Precio debe ser mayor a 0
+                            </mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="fill">
+                            <mat-label>Subtotal</mat-label>
+                            <input matInput type="number" formControlName="subtotal" readonly>
+                        </mat-form-field>
+
+                        <button mat-icon-button color="warn" type="button" (click)="removeDetalle(i)"
+                            *ngIf="detalles.length > 1">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </div>
+                </div>
+
+                <button mat-button type="button" (click)="addDetalle()">Agregar Producto</button>
+
+                <mat-form-field appearance="fill" class="total-field">
+                    <mat-label>Total</mat-label>
+                    <input matInput type="number" formControlName="total" readonly>
+                    <mat-error *ngIf="ordenForm.get('total')?.hasError('required')">
+                        Total es requerido
+                    </mat-error>
+                    <mat-error *ngIf="ordenForm.get('total')?.hasError('min')">
+                        Total debe ser mayor a 0
+                    </mat-error>
+                </mat-form-field>
+
+                <div class="button-row">
+                    <button mat-raised-button color="primary" type="submit" [disabled]="!ordenForm.valid">
+                        {{ isEdit ? 'Actualizar' : 'Guardar' }}
+                    </button>
+                    <button mat-raised-button type="button" [routerLink]="['/ordenes']">Cancelar</button>
+                </div>
+            </form>
+        </mat-card-content>
+    </mat-card>
+</div>
