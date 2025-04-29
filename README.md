@@ -1,59 +1,68 @@
-# OrdenesFrontend
+# Frontend Sistema de Órdenes y Productos (Angular)
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.1.5.
+## Descripción
 
-## Development server
+Aplicación frontend desarrollada en Angular 19 que consume una API REST para gestionar órdenes de compra y productos. Proporciona una interfaz intuitiva para realizar operaciones CRUD.
 
-To start a local development server, run:
+## Tecnologías utilizadas
 
-```bash
-ng serve
-```
+* Angular 19 (Standalone Components)
+* Angular Material UI
+* TypeScript
+* RxJS
+* HTML5/CSS3
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## Requisitos previos
 
-## Code scaffolding
+* Node.js 18+
+* npm 9+ o yarn
+* Angular CLI 19+
+* Backend funcionando (ver README del backend)
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## Configuración del proyecto
 
-```bash
-ng generate component component-name
-```
+Instalación:
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
+1. Clonar el repositorio:
 
 ```bash
-ng build
+  git clone [url-del-repositorio]
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+2. Navegar al directorio del proyecto:
 
 ```bash
-ng test
+  cd [nombre-del-proyecto]
 ```
 
-## Running end-to-end tests
+3. Instalar dependencias:
+```bash
+  npm install
+```
 
-For end-to-end (e2e) testing, run:
+## Funcionalidades principales
+
+Módulo de Productos:
+
+* Listado de productos con paginación
+* Creación/edición de productos
+* Eliminación de productos (con validación)
+
+Módulo de Órdenes:
+
+* Listado de órdenes
+* Creación/edición de órdenes con múltiples productos
+* Cálculo automático de subtotales y total
+* Visualización de detalles
+
+Reportes:
+
+* Top 3 productos más vendidos
+
+## Ejecución
+
+Para iniciar la aplicación en modo desarrollo:
 
 ```bash
-ng e2e
+  ng serve
 ```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
