@@ -55,12 +55,24 @@ export class ProductoFormComponent implements OnInit {
     if (this.productoForm.valid) {
       const productoData = this.productoForm.value;
       if (this.isEdit && this.productoId) {
-        this.productoService.updateProducto(this.productoId, productoData).subscribe(() => {
-          this.router.navigate(['/productos']);
+        // Asegúrate de incluir el ID en los datos del producto
+        productoData.id = this.productoId;
+        this.productoService.updateProducto(this.productoId, productoData).subscribe({
+          next: () => {
+            this.router.navigate(['/productos']);
+          },
+          error: (err) => {
+            console.error('Error al actualizar producto:', err);
+          }
         });
       } else {
-        this.productoService.createProducto(productoData).subscribe(() => {
-          this.router.navigate(['/productos']);
+        this.productoService.createProducto(productoData).subscribe({
+          next: () => {
+            this.router.navigate(['/productos']);
+          },
+          error: (err) => {
+            console.error('Error al crear producto:', err);
+          }
         });
       }
     }

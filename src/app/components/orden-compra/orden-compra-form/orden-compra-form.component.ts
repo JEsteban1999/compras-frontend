@@ -13,6 +13,8 @@ import { ProductoService } from '../../../services/producto.service';
 import { Producto } from '../../../models/producto.model';
 import { DetalleOrden } from '../../../models/detalle-orden.model';
 
+import { Icon } from '@mui/material';
+
 @Component({
   selector: 'app-orden-compra-form',
   standalone: true,
